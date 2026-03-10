@@ -70,7 +70,7 @@ Radar → Partner → Workshop → Keeper
 1. Partner 不直接替代 Workshop — 输出物永远是 brief，不是成品
 2. Keeper 必须真有否决权 — 否则只是礼仪，不是门卫
 3. Workshop 在关键节点强制暂停 — 不是"可以"介入，是"必须"等确认
-4. Partner 当前不做调度 — 你是中枢，不是它
+4. Partner 无自主调度权，但有经亚臣确认后的传话权 — 决策是你做的，它只传递
 
 ---
 
