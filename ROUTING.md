@@ -18,14 +18,24 @@
 
 ## Discord 频道结构
 
-| 频道 | 用途 | 谁写 | 谁读 |
-|------|------|------|------|
-| `#radar` | 信息简报 + 即时警报 | Radar | 亚臣、Partner（参考用） |
-| `#partner` | 战略对话 + Brief 输出 | Partner + 亚臣 | 亚臣 |
-| `#workshop` | 任务接收 + 进度汇报 + 交付 | Workshop | 亚臣 |
-| `#keeper` | 审核报告 | Keeper | 亚臣 |
-| `#butler` | 生活管理（日程/健康/财务） | Butler | 亚臣 |
-| `#general` | 亚臣的自由空间 | 亚臣 | 所有 agent（被动） |
+> 频道按场景划分，不按 agent 1:1 对应。Partner 和 Ally 走 DM 私聊。
+
+| 类别 | 频道 | 用途 | 谁写 | 谁读 |
+|------|------|------|------|------|
+| **情报中心** | `#radar-log` | 信息简报 + 即时警报 | Radar | 亚臣、Partner（参考用） |
+| | `#design-intel` / `#beauty-intel` / `#ai-intel` | 行业情报论坛（每条情报一个帖子） | Radar | 亚臣、Partner、Workshop |
+| **engine** | `#cubox` | 素材入库讨论 | Radar（建议入库） | 亚臣 |
+| | `#learning` | 阅读讨论、概念拆解 | Partner、Ally | 亚臣 |
+| | `#method` | 方法论打磨、SOP 审核 | Partner、Keeper | Workshop（取弹药） |
+| | `#writing` | 个人内容生产、发布前审核 | Workshop、Keeper | 亚臣 |
+| **work-品牌** | 各业务频道 | 品牌项目执行与审核 | Workshop、Keeper | 亚臣、Partner（只读上下文） |
+| **life** | `#periodic` | 周记/月记/年记推送 | Butler | 亚臣 |
+| | `#health` | 健康管理：追踪、提醒、数据摘要 | Butler | 亚臣 |
+| | `#asset` | 资产管理：支出记录、月度摘要 | Butler | 亚臣 |
+| **lab** | `#灵感种子` | 灵感捕捉、种子碰撞 | Ally | 亚臣、Partner（碰撞建议） |
+| | 各实验频道 | 影像/视频/音乐等创作实验 | Workshop | 亚臣 |
+| **DM** | Partner 私聊 | 战略对话 + Brief 输出 | Partner + 亚臣 | 亚臣 |
+| | Ally 私聊 | 内省对话、日记触发、情感解读 | Ally + 亚臣 | 亚臣 |
 
 ---
 
@@ -34,22 +44,22 @@
 ### 主流程
 
 ```
-Radar → #radar → 亚臣看到信号
-                      ↓
-           亚臣决定是否行动
-                      ↓
-       亚臣 + Partner → #partner → 对话 → Brief
-                      ↓
-           亚臣确认 Brief
-                      ↓
-       亚臣把 Brief 发到 #workshop → Workshop 执行
-                      ↓
-       Workshop 在关键节点暂停 → #workshop → 亚臣确认
-                      ↓
-       Workshop 完成 → 交付物发到 #workshop
-                      ↓
-       亚臣触发审核 → Keeper 在 #keeper 输出报告
-                      ↓
+Radar → #radar-log → 亚臣看到信号
+                          ↓
+               亚臣决定是否行动
+                          ↓
+       亚臣 + Partner → DM 私聊 → 对话 → Brief
+                          ↓
+               亚臣确认 Brief
+                          ↓
+       亚臣把 Brief 发到 work-品牌对应频道 → Workshop 执行
+                          ↓
+       Workshop 在关键节点暂停 → 当前业务频道 → 亚臣确认
+                          ↓
+       Workshop 完成 → 交付物发到当前业务频道
+                          ↓
+       亚臣触发审核 → Keeper 在当前业务频道输出报告
+                          ↓
        🟢 通过 → 亚臣拿到成品
        🔴 不通过 → 按打回路径处理
 ```
@@ -58,8 +68,8 @@ Radar → #radar → 亚臣看到信号
 
 | 问题类型 | 打回目标 | 频道 |
 |---------|---------|------|
-| 执行层（文案措辞、数据错误） | Workshop 重做 | `#workshop` |
-| 方向层（brief 本身有矛盾） | 亚臣 + Partner 重新讨论 | `#partner` |
+| 执行层（文案措辞、数据错误） | Workshop 重做 | 当前 work-品牌业务频道 |
+| 方向层（brief 本身有矛盾） | 亚臣 + Partner 重新讨论 | Partner DM 私聊 |
 
 ### 快捷路径（跳过某些环节）
 
@@ -67,7 +77,7 @@ Radar → #radar → 亚臣看到信号
 |------|--------|------|
 | 简单任务（改个文案、调个格式） | Partner | 亚臣直接给 Workshop 下 brief |
 | 低风险内容（内部文档、草稿） | Keeper | 亚臣自行判断无需审核 |
-| 纯探索（头脑风暴、方向讨论） | Workshop + Keeper | 只在 Partner 频道对话 |
+| 纯探索（头脑风暴、方向讨论） | Workshop + Keeper | 只在 Partner DM 对话 |
 
 ---
 
@@ -78,8 +88,8 @@ Radar → #radar → 亚臣看到信号
 - 所有跨 agent 信息通过**亚臣转发**或**共享知识库**传递
 
 ### 例外
-- **Partner 可只读访问 `#radar` 频道历史消息**，作为对话参考素材（不发消息、不指挥 Radar）
-- **Partner 可在亚臣明确指示下将 brief 发到 `#workshop`**（传话权，非调度权）
+- **Partner 可只读访问 `#radar-log` 及各 intel 论坛历史消息**，作为对话参考素材（不发消息、不指挥 Radar）
+- **Partner 可在亚臣明确指示下将 brief 发到对应的 work-品牌业务频道**（传话权，非调度权）
 
 ### 共享知识库
 - **载体：** Obsidian Vault
@@ -95,11 +105,11 @@ Radar → #radar → 亚臣看到信号
 | Butler | 不参与 |
 
 ### Butler 隔离
-- Butler 只在 `#butler` 频道活动，不读写其他工作频道
-- 工作 agent 不读写 `#butler` 频道
+- Butler 只在 life 类别（`#periodic` / `#health` / `#asset`）活动，不读写工作频道（情报中心 / engine / work-品牌 / lab）
+- 工作 agent 不读写 life 类别频道
 - Butler 不读写 Obsidian Vault
 - Butler 不与任何工作 agent 有信息交集
-- 隔离通过频道边界实现；未来飞书权限就绪后可升级为平台级隔离
+- 隔离通过频道类别边界实现；未来飞书权限就绪后可升级为平台级隔离
 
 ---
 
@@ -111,7 +121,7 @@ Radar → #radar → 亚臣看到信号
 
 ### 未来阶段：半自动路由（条件满足后启用）
 - **条件：** 某个流程已经跑过 10 次以上，pattern 稳定
-- **方式：** Partner 可以在亚臣确认后直接把 brief 推到 `#workshop`
+- **方式：** Partner 可以在亚臣确认后直接把 brief 推到对应的 work-品牌业务频道
 - **约束：** 自动路由只适用于标准化流程，非标流程永远人工
 
 ### 永不自动化

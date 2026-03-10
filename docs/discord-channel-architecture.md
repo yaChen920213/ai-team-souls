@@ -121,9 +121,9 @@
 
 ## 注意事项
 
-- 各 agent 的 TOOLS.md / AGENTS.md / ROUTING.md 中仍有旧频道名引用（`#partner`、`#butler` 等），待频道架构在实际使用中稳定后再批量更新
 - 新品牌上线时，在 Discord 创建新的 work-品牌名 类别即可
 - 新实验类型启动时，在 lab 类别下新增频道即可
+- 各 agent 文档（TOOLS.md / AGENTS.md / ROUTING.md）已于 2026-03-11 完成批量更新，旧频道引用（`#partner`、`#butler`、`#ally`、`#workshop`、`#keeper`、`#radar`）已全部替换为新架构对应的频道名
 
 ---
 

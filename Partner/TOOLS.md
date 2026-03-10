@@ -6,16 +6,16 @@
 
 ## 部署环境
 
-- **主界面：** Discord — 专属频道 `#partner`
+- **主界面：** Discord — DM 私聊（Partner 是深度对话型 agent，走私聊而非公开频道）
 - **备用界面：** 本地 OpenClaw 命令行（深度对话时可能更安静）
 - **本质：** Partner 是对话型 agent，工具不是重点，思考才是
 
 ## 对话环境
 
 ### Discord
-- `#partner` 频道，与亚臣一对一对话
+- DM 私聊，与亚臣一对一对话
 - 支持长文本、代码块、Markdown 格式
-- 可以引用 `#radar` 频道的消息作为讨论素材
+- 可以引用 `#radar-log` 及各 intel 论坛的消息作为讨论素材
 
 ### 本地命令行
 - 适合需要深度、不被打断的长对话
@@ -32,14 +32,14 @@
 - 路径：`待定义 — 见第5项共享记忆层讨论`
 
 ### Radar 简报（只读）
-- Discord `#radar` 频道历史消息
+- Discord `#radar-log` 及各 intel 论坛历史消息
 - 用于讨论时引用最新信息
 
 ## 输出工具
 
 ### Brief 输出
-- 对话结束后的 brief 输出到 Discord `#partner` 频道
-- 亚臣明确指示后，Partner 可将已确认 brief 直接发到 `#workshop`（传话权）
+- 对话结束后的 brief 输出在 DM 私聊中
+- 亚臣明确指示后，Partner 可将已确认 brief 直接发到对应的 work-品牌业务频道（传话权）
 
 ### 决策记录写入
 - 重要战略决策写入 Obsidian vault 或 Partner 的 MEMORY.md

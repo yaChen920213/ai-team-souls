@@ -6,9 +6,9 @@
 
 ## 部署环境
 
-- **主界面：** Discord — 专属频道 `#workshop`
+- **主界面：** Discord — work-品牌对应的业务频道（按任务所属品牌和场景）
 - **执行环境：** 本地 OpenClaw 实例（长时间任务运行）
-- **进度汇报：** Discord `#workshop` 频道
+- **进度汇报：** Discord 当前任务对应的 work-品牌业务频道
 
 ## 文案与内容生产
 
@@ -54,7 +54,7 @@
 - 路径：`待定义 — 见第5项共享记忆层讨论`
 
 ### Brief 来源
-- Discord `#partner` 频道或亚臣直接提供的 brief
+- Partner DM 私聊中亚臣转发，或亚臣直接在业务频道提供的 brief
 
 ## 文件系统
 
