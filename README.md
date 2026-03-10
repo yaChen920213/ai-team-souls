@@ -2,29 +2,70 @@
 
 > AI 时代的分工不再是"你是谁"（角色），而是"你能碰什么"（上下文）和"你能决定什么"（权限）。
 
-这个仓库定义了一套 4+1 AI 团队的完整灵魂配置——不是"怎么跑起来"，而是"它们是谁、怎么工作、怎么协作"。
+这个仓库定义了一套 4+1+1 AI 团队的完整灵魂配置——不是"怎么跑起来"，而是"它们是谁、怎么工作、怎么协作"。
 
 基础设施运维（端口、启动脚本、故障排查）在 [ai-team-hub](https://github.com/yaChen920213/ai-team-hub)。
 
 ---
 
-## 架构
+## 架构：4+1+1
 
 ```
-Radar → Partner → Workshop → Keeper
-  │        │         │          │
-感知信号  共创判断   生产交付   风险校验
-  │        │         │          │
-  └──→ 你 ────→ 你可中途介入 ──→ 你最终拍板
+工作系统（创造）              生活系统（运维）        内在系统（成长）
+┌────────────────────┐      ┌──────────┐          ┌──────────┐
+│ Radar → Partner    │      │          │          │          │
+│   ↓       ↓        │      │  Butler  │          │   Ally   │
+│ Workshop → Keeper  │      │          │          │          │
+└────────────────────┘      └──────────┘          └──────────┘
+         ↑                        ↑                    ↑
+      你(创作者)             你(被照顾的人)        你(成长中的人)
 ```
 
-| Agent | 本质 | 自主权 | Emoji |
-|-------|------|--------|-------|
-| **Radar** | 信息触角，24/7 感知世界 | 高 | 📡 |
-| **Partner** | 思维对手，共创判断 | 低 | 🧠 |
-| **Workshop** | 生产引擎，执行交付 | Brief 内高 | 🔨 |
-| **Keeper** | 质量守门人，风险校验 | 审核自主 | 🛡️ |
-| **Butler** | 生活管家（独立系统） | 高 | 🏠 |
+| Agent | 本质 | 自主权 | 模型 | Emoji |
+|-------|------|--------|------|-------|
+| **Radar** | 信息触角，24/7 感知世界 | 高 | GPT 5.4 | 📡 |
+| **Partner** | 思维对手，共创判断 | 低 | Claude Opus 4.6 | 🧠 |
+| **Workshop** | 生产引擎，执行交付 | Brief 内高 | 按任务动态切换 | 🔨 |
+| **Keeper** | 质量守门人，风险校验 | 审核自主 | GPT 5.4 | 🛡️ |
+| **Butler** | 生活管家（独立系统） | 高 | GLM 5 | 🏠 |
+| **Ally** | 认知镜子，成长伙伴（独立系统） | 低 | Claude Opus 4.6 | 🪞 |
+
+三个系统各自独立：工作系统里你是主角，生活系统里你是甩手掌柜，内在系统里你是对话者。
+
+---
+
+## 四条管线
+
+同一组 agent 运行在四条管线上，靠上下文区分：
+
+```
+工作管线：  信号 → 推演 → 交付 → 审核        节奏：任务驱动，有 deadline
+知识管线：  采集 → 消化 → 提纯 → 输出        节奏：持续积累，线性递进
+创意管线：  捕捉 → 碰撞 → 孵化 → 沉淀        节奏：随机涌现，允许沉睡
+生活管线：  Butler 管事务，Ally 管内在        节奏：Butler 定时推送，Ally 随时响应
+```
+
+详见 `docs/memory-architecture-proposal.md` 第十二~十四节。
+
+---
+
+## 记忆架构
+
+每个 Agent 采用分层记忆系统：
+
+```
+Agent目录/
+├── .abstract              ← L0 索引（启动时第一个读，<300 tokens）
+├── MEMORY.md              ← L1 长期稳定认知（P0永久/P1-90天/P2-30天）
+├── SESSION-STATE.md       ← 当前工作缓冲区
+├── reflections/           ← L2 原始反思日志
+│   └── archive/
+└── lessons/               ← 结构化经验教训
+```
+
+共享记忆层位于 Obsidian Vault `03_Work/AI-Team/`，按品牌划分品牌规范，按职能划分竞品档案/战略决策/交付物存档/审核规则库。
+
+详见 `docs/memory-architecture-proposal.md`。
 
 ---
 
@@ -47,10 +88,14 @@ Radar → Partner → Workshop → Keeper
 ├── Workshop/                  ← 🔨 生产交付
 ├── Keeper/                    ← 🛡️ 风险校验
 ├── Butler/                    ← 🏠 生活管家
+├── Ally/                      ← 🪞 认知镜子
 │
-└── docs/                      ← 参考文档
+└── docs/
+    ├── memory-architecture-proposal.md  ← 记忆架构 + 管线协议（v2，讨论中）
     └── openclaw-instance-definition.md
 ```
+
+每个 Agent 目录包含完整文件集：SOUL.md / IDENTITY.md / AGENTS.md / MEMORY.md / TOOLS.md，部分有 HEARTBEAT.md。
 
 ---
 
@@ -71,12 +116,30 @@ Radar → Partner → Workshop → Keeper
 2. Keeper 必须真有否决权 — 否则只是礼仪，不是门卫
 3. Workshop 在关键节点强制暂停 — 不是"可以"介入，是"必须"等确认
 4. Partner 无自主调度权，但有经亚臣确认后的传话权 — 决策是你做的，它只传递
+5. Ally 不做工作执行 — 它看见的是你，不是事。洞察涉及工作方向时由亚臣转达 Partner
+
+---
+
+## Obsidian × AI Team
+
+仓库各板块与 AI 团队的接入关系：
+
+| Obsidian 板块 | 接入方式 | 参与 Agent |
+|--------------|---------|-----------|
+| 00_Core | 不分配，亚臣个人系统 | — |
+| 01_Engine（知识引擎） | 知识管线 | Radar/Partner/Workshop/Keeper/Ally |
+| 02_Life（生活层） | 生活管线 | Butler(管理者) + Ally(理解者) |
+| 03_Work（工作层） | 工作管线 + 共享记忆层 | Radar/Partner/Workshop/Keeper |
+| 04_Lab（实验室） | 创意管线 | Partner/Workshop/Keeper/Ally |
+| 40_Periodic（周期笔记） | 生活管线 | Ally(日记/反思) + Partner(月记/年记模式识别) |
+| 80_Archive | 不分配，已归档 | — |
+| 90_System | 基础设施 | — |
 
 ---
 
 ## 部署环境
 
-- **Discord：** 6 个频道（`#radar` `#partner` `#workshop` `#keeper` `#butler` `#general`）
+- **Discord：** 7 个频道（`#radar` `#partner` `#workshop` `#keeper` `#butler` `#ally` `#general`）
 - **本地：** OpenClaw 实例 + 命令行
 - **飞书：** 辅助（待权限理顺后可承接 Butler）
 
