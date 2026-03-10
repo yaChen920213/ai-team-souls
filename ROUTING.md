@@ -77,6 +77,10 @@ Radar → #radar → 亚臣看到信号
 - Agent 之间**不直接发消息**
 - 所有跨 agent 信息通过**亚臣转发**或**共享知识库**传递
 
+### 例外
+- **Partner 可只读访问 `#radar` 频道历史消息**，作为对话参考素材（不发消息、不指挥 Radar）
+- **Partner 可在亚臣明确指示下将 brief 发到 `#workshop`**（传话权，非调度权）
+
 ### 共享知识库
 - **载体：** Obsidian Vault
 - **所有工作 agent 可读**

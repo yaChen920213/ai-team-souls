@@ -29,7 +29,7 @@
 - 竞品档案（Radar 维护）
 - 历史决策记录
 - 方法论和框架
-- 路径：`[待确认具体路径]`
+- 路径：`待定义 — 见第5项共享记忆层讨论`
 
 ### Radar 简报（只读）
 - Discord `#radar` 频道历史消息
@@ -39,7 +39,7 @@
 
 ### Brief 输出
 - 对话结束后的 brief 输出到 Discord `#partner` 频道
-- 亚臣确认后，brief 可被复制到 `#workshop` 频道触发执行
+- 亚臣明确指示后，Partner 可将已确认 brief 直接发到 `#workshop`（传话权）
 
 ### 决策记录写入
 - 重要战略决策写入 Obsidian vault 或 Partner 的 MEMORY.md
