@@ -139,7 +139,71 @@ Agent目录/
 
 ## 部署环境
 
-- **Discord：** 7 个频道（`#radar` `#partner` `#workshop` `#keeper` `#butler` `#ally` `#general`）
+### Discord 频道架构
+
+频道按场景划分（而非按 agent 1:1），对话型 agent（Partner、Ally）走 DM 私聊：
+
+```
+情报中心
+├── #radar-log          文字频道，信息流/简报推送
+├── #design-intel       论坛，设计领域情报
+├── #beauty-intel       论坛，美妆个护情报
+└── #ai-intel           论坛，AI 领域情报
+
+engine
+├── #cubox              采集层
+├── #learning           消化层
+├── #method             提纯层
+└── #writing            输出层
+
+work-品牌名             按品牌划分，每个品牌一个类别
+├── work-hahn/          品牌管理/产品开发/产品包装/微信公众号/品牌官网/...
+├── work-lubelle/       品牌升级/...
+└── ...                 新品牌新增类别，非活跃品牌折叠
+
+life
+├── #periodic           周记/月记/年记（日记走 Ally DM）
+├── #health             健康管理
+├── #asset              资产管理
+└── #career             职业发展
+
+lab
+├── #灵感种子
+├── #随兴实验场
+├── #影像实验
+├── #视频实验
+├── #音乐实验
+└── ...                 新实验类型随时新增
+
+DM 私聊
+├── Partner             战略对话 + Brief 输出
+└── Ally                内省对话 + 日记触发
+```
+
+### 频道权限概览
+
+| 类别 | 频道 | 可写 Agent | 可读 Agent |
+|------|------|-----------|-----------|
+| 情报中心 | #radar-log | Radar | Partner |
+| 情报中心 | 各 intel 论坛 | Radar | Partner, Workshop |
+| engine | #cubox | Radar（建议入库） | — |
+| engine | #learning | Partner, Ally | — |
+| engine | #method | Partner, Keeper | Workshop（取弹药） |
+| engine | #writing | Workshop, Keeper | — |
+| work-品牌 | 各业务频道 | Workshop, Keeper | Partner（只读上下文） |
+| life | #periodic | Butler（周报推送） | Partner（月记/年记） |
+| life | #health | Butler | Ally（只读） |
+| life | #asset | Butler | — |
+| life | #career | — | Ally（只读） |
+| lab | #灵感种子 | Ally | Partner（碰撞建议） |
+| lab | 各实验频道 | Workshop | Partner, Keeper |
+| DM | Partner 私聊 | Partner | — |
+| DM | Ally 私聊 | Ally | — |
+
+详见 `docs/discord-channel-architecture.md`。
+
+### 其他环境
+
 - **本地：** OpenClaw 实例 + 命令行
 - **飞书：** 辅助（待权限理顺后可承接 Butler）
 
